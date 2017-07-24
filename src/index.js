@@ -6,7 +6,11 @@ import registerServiceWorker from './registerServiceWorker'
 
 import injectTapEventPlugin from 'react-tap-event-plugin'
 
-injectTapEventPlugin()
+// just to be sure we inject only once
+window.onload = function() {
+  console.log('onload')
+  injectTapEventPlugin()
+}
 
 ReactDOM.render(<App />, document.getElementById('root'))
 registerServiceWorker()

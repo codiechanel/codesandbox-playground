@@ -6,6 +6,9 @@ import RaisedButton from 'material-ui/RaisedButton'
 import Drawer from 'material-ui/Drawer'
 import AppBar from 'material-ui/AppBar'
 import { HashRouter as Router, Route, Link } from 'react-router-dom'
+import mainStore from './MainStore'
+import { observer } from 'mobx-react'
+import { observable, action } from 'mobx'
 
 const Home = () =>
   <div>
@@ -15,7 +18,6 @@ const Home = () =>
     <p className="App-intro">
       To get started, edit <code>src/App.js</code> and save to reload.
     </p>
-    <RaisedButton label="Material UI" />
   </div>
 
 const About = () =>
@@ -23,14 +25,22 @@ const About = () =>
     <h2>About</h2>
   </div>
 
+@observer
 class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       open: false
     }
+
+    this.person = observable({
+      // observable properties:
+      name: 'John'
+    })
+
     this.handler = this.handler.bind(this)
     this.handleClose = this.handleClose.bind(this)
+    this.handleTap = this.handleTap.bind(this)
   }
   componentDidMount() {
     console.log('mount')
@@ -44,7 +54,13 @@ class App extends React.Component {
     this.setState({ open: false })
   }
 
+  handleTap() {
+    console.log('handleTap')
+    this.person.name = new Date().getTime().toString()
+  }
+
   render() {
+    console.log('rendering...', this.person.name)
     return (
       <Router>
         <MuiThemeProvider>
@@ -79,6 +95,7 @@ class App extends React.Component {
 
             <Route exact path="/" component={Home} />
             <Route path="/about" component={About} />
+            <RaisedButton onTouchTap={this.handleTap} label="Material UI" />
           </div>
         </MuiThemeProvider>
       </Router>

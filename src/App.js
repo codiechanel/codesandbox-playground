@@ -29,23 +29,11 @@ class App extends React.Component {
       open: false
     }
 
-    this.person = observable({
-      // observable properties:
-      name: 'John'
-    })
-
     this.handler = this.handler.bind(this)
     this.handleClose = this.handleClose.bind(this)
-    this.handleTap = this.handleTap.bind(this)
   }
   componentDidMount() {
     console.log('mount')
-  }
-  handleTap() {
-    console.log('handleTap')
-    let timestamp = new Date().getTime().toString()
-    mainStore.add(timestamp)
-    // this.person.name = timestamp
   }
 
   handler() {
@@ -91,11 +79,6 @@ class App extends React.Component {
 
             <Route exact path="/" component={homeScreen} />
             <Route path="/about" component={About} />
-            <RaisedButton
-              style={{ margin: 15 }}
-              onTouchTap={this.handleTap}
-              label="Tap Button from Main App"
-            />
           </div>
         </MuiThemeProvider>
       </Router>

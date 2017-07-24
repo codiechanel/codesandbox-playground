@@ -8,14 +8,6 @@ import RaisedButton from 'material-ui/RaisedButton'
 class App extends React.Component {
   constructor(props) {
     super(props)
-
-    this.handleTap = this.handleTap.bind(this)
-  }
-  handleTap() {
-    console.log('handleTap')
-    let timestamp = new Date().getTime().toString()
-    this.props.mainStore.add(timestamp)
-    // this.person.name = timestamp
   }
 
   render() {
@@ -24,16 +16,7 @@ class App extends React.Component {
         <div className="App-header">
           <h2>Welcome to React</h2>
         </div>
-        <p className="App-intro">
-          <b>
-            map size: {this.props.mainStore.timestamps.size}
-          </b>
-        </p>
-        <RaisedButton
-          style={{ margin: 15 }}
-          onTouchTap={this.handleTap}
-          label="Mobx from Home component"
-        />
+        <p className="App-intro">Loaded with Mobx</p>
       </div>
     )
   }

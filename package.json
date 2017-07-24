@@ -1,0 +1,20 @@
+{
+  "name": "codesandbox-playground",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codiechanel/react-simple-boilerplate.git"
+  },
+  "author": "Codie",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/codiechanel/react-simple-boilerplate/issues"
+  },
+  "homepage": "https://github.com/codiechanel/react-simple-boilerplate#readme",
+  "dependencies": {
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1"
+  }
+}

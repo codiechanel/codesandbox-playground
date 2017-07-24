@@ -1,12 +1,13 @@
 import { observable, action } from 'mobx'
 class Store {
-  @observable groups = new Map()
+  @observable timestamps = new Map()
   @observable filter = ''
   @observable loaded = false
 
   @action
   add(item) {
-    this.groups.set(item, item)
+    console.log('adding...')
+    this.timestamps.set(item, item)
   }
 }
 const store = new Store()

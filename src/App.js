@@ -9,15 +9,11 @@ import { HashRouter as Router, Route, Link } from 'react-router-dom'
 import mainStore from './MainStore'
 import { observer } from 'mobx-react'
 import { observable, action } from 'mobx'
+import Home from './Home'
 
-const Home = () =>
+const homeScreen = ({ location }) =>
   <div>
-    <div className="App-header">
-      <h2>Welcome to cool great React</h2>
-    </div>
-    <p className="App-intro">
-      To get started, edit <code>src/App.js</code> and save to reload.
-    </p>
+    <Home mainStore={mainStore} />
   </div>
 
 const About = () =>
@@ -45,6 +41,12 @@ class App extends React.Component {
   componentDidMount() {
     console.log('mount')
   }
+  handleTap() {
+    console.log('handleTap')
+    let timestamp = new Date().getTime().toString()
+    mainStore.add(timestamp)
+    // this.person.name = timestamp
+  }
 
   handler() {
     this.setState({ open: !this.state.open })
@@ -54,13 +56,7 @@ class App extends React.Component {
     this.setState({ open: false })
   }
 
-  handleTap() {
-    console.log('handleTap')
-    this.person.name = new Date().getTime().toString()
-  }
-
   render() {
-    console.log('rendering...', this.person.name)
     return (
       <Router>
         <MuiThemeProvider>
@@ -93,9 +89,13 @@ class App extends React.Component {
               </div>
             </Drawer>
 
-            <Route exact path="/" component={Home} />
+            <Route exact path="/" component={homeScreen} />
             <Route path="/about" component={About} />
-            <RaisedButton onTouchTap={this.handleTap} label="Material UI" />
+            <RaisedButton
+              style={{ margin: 15 }}
+              onTouchTap={this.handleTap}
+              label="Tap Button from Main App"
+            />
           </div>
         </MuiThemeProvider>
       </Router>

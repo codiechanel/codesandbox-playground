@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 // import logo from './logo.svg';
 // import './App.css';
+import RaisedButton from 'material-ui/RaisedButton'
 
 class App extends React.Component {
   componentDidMount() {
@@ -9,15 +11,17 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          {/*<img src={logo} className="App-logo" alt="logo" />*/}
-          <h2>Welcome to cool great React</h2>
+      <MuiThemeProvider>
+        <div className="App">
+          <div className="App-header">
+            <h2>Welcome to cool great React</h2>
+          </div>
+          <p className="App-intro">
+            To get started, edit <code>src/App.js</code> and save to reload.
+          </p>
+          <RaisedButton label="Material UI" />
         </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      </MuiThemeProvider>
     )
   }
 }

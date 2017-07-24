@@ -11,10 +11,7 @@ import { observer } from 'mobx-react'
 import { observable, action } from 'mobx'
 import Home from './Home'
 
-const homeScreen = ({ location }) =>
-  <div>
-    <Home mainStore={mainStore} />
-  </div>
+const homeScreen = ({ location }) => <Home mainStore={mainStore} />
 
 // center all child
 const demoScreen1 = () =>
@@ -64,9 +61,28 @@ const demoScreen2a = () =>
       alignItems: 'flex-start'
     }}
   >
-    <RaisedButton label="demoScreen2" primary />
+    <RaisedButton label="demoScreen2a" primary />
 
-    <RaisedButton label="demoScreen2" primary />
+    <RaisedButton label="demoScreen2a" primary />
+  </div>
+
+// vertical elements to the left, spaced apart
+const demoScreen2b = () =>
+  <div
+    style={{
+      display: 'flex',
+      flex: 0.75,
+      padding: 15,
+      flexDirection: 'column',
+      backgroundColor: 'gray',
+      justifyContent: 'space-between',
+      alignItems: 'flex-start'
+    }}
+  >
+    <RaisedButton label="demoScreen2b" primary />
+
+    <RaisedButton label="demoScreen2b" primary />
+    <RaisedButton label="demoScreen2b" primary />
   </div>
 
 // the same as above, but now they start from the bottom
@@ -141,8 +157,22 @@ const demoScreen5 = () =>
   </div>
 
 const About = () =>
-  <div>
-    <h2>About</h2>
+  <div
+    style={{
+      padding: 20,
+      display: 'flex',
+      flex: 1,
+      flexDirection: 'column',
+      overflow: 'auto',
+      backgroundColor: 'lightgray'
+    }}
+  >
+    <h2>About the color scheme used</h2>
+    <p>green is our div root container</p>
+    <p>blue is the parent of all react components</p>
+    <p>This parent has two child components</p>
+    <p>the app bar, which is always visible</p>
+    <p>and the gray component which changes based on navigation</p>
   </div>
 
 @observer
@@ -182,7 +212,7 @@ class App extends React.Component {
             }}
           >
             <AppBar
-              title="Playground"
+              title="Flexbox Playground"
               onLeftIconButtonTouchTap={this.handler}
               onTitleTouchTap={this.handler}
               showMenuIconButton
@@ -213,6 +243,11 @@ class App extends React.Component {
                   <li>
                     <Link onClick={this.handleClose} to="/demo2a">
                       Demo2a
+                    </Link>
+                  </li>
+                  <li>
+                    <Link onClick={this.handleClose} to="/demo2b">
+                      Demo2b
                     </Link>
                   </li>
                   <li>
@@ -248,6 +283,7 @@ class App extends React.Component {
             <Route exact path="/demo1" component={demoScreen1} />
             <Route exact path="/demo2" component={demoScreen2} />
             <Route exact path="/demo2a" component={demoScreen2a} />
+            <Route exact path="/demo2b" component={demoScreen2b} />
             <Route exact path="/demo3" component={demoScreen3} />
             <Route exact path="/demo3a" component={demoScreen3a} />
             <Route exact path="/demo4" component={demoScreen4} />

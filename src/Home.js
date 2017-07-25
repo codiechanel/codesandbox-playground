@@ -7,15 +7,15 @@ import autobind from 'autobind-decorator'
 import Rx from 'rxjs'
 import mobxutils, { toStream } from 'mobx-utils'
 
-// async function startFetch(term) {
-//   // let term = 'ava'
-//   console.log('fetching...', term)
-//   let url = `https://api.github.com/search/repositories?q=${term}`
-//   let res = await fetch(url)
-//   let json = await res.json()
-//   // console.log('json', json)
-//   return json
-// }
+async function startFetch(term) {
+  // let term = 'ava'
+  console.log('fetching...', term)
+  let url = `https://api.github.com/search/repositories?q=${term}`
+  let res = await fetch(url)
+  let json = await res.json()
+  // console.log('json', json)
+  return json
+}
 
 function fetchy(term) {
   let url = `https://api.github.com/search/repositories?q=${term}`
@@ -82,11 +82,13 @@ class App extends React.Component {
       // })
       .debounce(() => Rx.Observable.timer(2000)) /* debounce it */
       .distinctUntilChanged()
-      .switchMap(term => {
-        console.log('the term')
-        let url = `https://api.github.com/search/repositories?q=${term}`
-        return fetch(url).then(res => res.json())
-      }) //use instead of flatmap
+      .switchMap(startFetch)
+      // .switchMap(term => {
+      //   console.log('the term')
+      //   let url = `https://api.github.com/search/repositories?q=${term}`
+      //   return fetch(url).then(res => res.json())
+      // }) 
+      //use instead of flatmap
       // .map(res => res.json())
       .subscribe(x => {
         console.log('wow!', x)

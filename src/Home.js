@@ -4,7 +4,7 @@ import { observable, action, autorun } from 'mobx'
 import RaisedButton from 'material-ui/RaisedButton'
 import AutoComplete from 'material-ui/AutoComplete'
 import autobind from 'autobind-decorator'
-import Rx from 'rxjs/Rx'
+import Rx from 'rxjs'
 import mobxutils, { toStream } from 'mobx-utils'
 
 // async function startFetch(term) {

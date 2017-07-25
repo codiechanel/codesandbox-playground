@@ -18,7 +18,9 @@ const demoScreen1 = () =>
   <div
     style={{
       display: 'flex',
-      flex: 0.75,
+      flex: 1,
+      height: '100%',
+
       flexDirection: 'column',
       backgroundColor: 'gray',
       justifyContent: 'center',
@@ -30,19 +32,68 @@ const demoScreen1 = () =>
     <RaisedButton label="demoScreen1" primary />
   </div>
 
+const msgComp = () =>
+  <div
+    style={{
+      padding: 15,
+      zIndex: 2,
+      position: 'absolute',
+      left: 0,
+      top: 0
+    }}
+  >
+    <h3>Here we center all child elements vertically and horizontally</h3>
+  </div>
+
+function withSubscription(WrappedComponent, MsgComponent) {
+  return class extends React.Component {
+    render() {
+      return (
+        <div
+          style={{
+            height: '100%',
+            position: 'relative',
+            backgroundColor: 'red'
+          }}
+        >
+          <MsgComponent />
+          <WrappedComponent />
+        </div>
+      )
+    }
+  }
+}
+
+const demo1tWithSubscription = withSubscription(demoScreen1, msgComp)
+
 // equal spacing between elements
 const demoScreen2 = () =>
   <div
     style={{
       display: 'flex',
-      flex: 0.75,
-      padding: 15,
+      flex: 1,
       flexDirection: 'row',
       backgroundColor: 'gray',
       justifyContent: 'space-around',
-      alignItems: 'flex-start'
+      alignItems: 'flex-start',
+      position: 'relative'
     }}
   >
+    <div
+      style={{
+        zIndex: 2,
+        opacity: 0.5,
+        backgroundColor: 'red',
+        width: '100%',
+        position: 'absolute',
+        left: 0,
+        bottom: 0
+      }}
+    >
+      <h3 style={{ margin: 5, backgroundColor: 'blue', textAlign: 'center' }}>
+        Equal space around child elements.
+      </h3>
+    </div>
     <RaisedButton label="demoScreen2" primary />
 
     <RaisedButton label="demoScreen2" primary />
@@ -155,6 +206,49 @@ const demoScreen5 = () =>
 
     <RaisedButton label="demoScreen5" default />
   </div>
+
+const styles = {
+  menu: {
+    marginLeft: '60px',
+    marginRight: 'auto'
+  }
+}
+const demoScreen6 = () =>
+  <header style={{ background: '#333' }}>
+    <nav
+      style={{
+        display: 'flex',
+
+        alignItems: 'center',
+        width: '70%',
+        maxWidth: '1200px',
+        margin: '0 auto'
+      }}
+    >
+      <h1 class="logo">LOGO</h1>
+
+      <ul style={styles.menu}>
+        <li>
+          <a href="">About</a>
+        </li>
+        <li>
+          <a href="">Projects</a>
+        </li>
+        <li>
+          <a href="">Contact</a>
+        </li>
+      </ul>
+
+      <ul class="social">
+        <li>
+          <a href="">Facebook</a>
+        </li>
+        <li>
+          <a href="">Twitter</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
 
 const About = () =>
   <div
@@ -271,6 +365,11 @@ class App extends React.Component {
                     </Link>
                   </li>
                   <li>
+                    <Link onClick={this.handleClose} to="/demo6">
+                      Demo6
+                    </Link>
+                  </li>
+                  <li>
                     <Link onClick={this.handleClose} to="/about">
                       About
                     </Link>
@@ -280,7 +379,7 @@ class App extends React.Component {
             </Drawer>
 
             <Route exact path="/" component={homeScreen} />
-            <Route exact path="/demo1" component={demoScreen1} />
+            <Route exact path="/demo1" component={demo1tWithSubscription} />
             <Route exact path="/demo2" component={demoScreen2} />
             <Route exact path="/demo2a" component={demoScreen2a} />
             <Route exact path="/demo2b" component={demoScreen2b} />
@@ -288,6 +387,7 @@ class App extends React.Component {
             <Route exact path="/demo3a" component={demoScreen3a} />
             <Route exact path="/demo4" component={demoScreen4} />
             <Route exact path="/demo5" component={demoScreen5} />
+            <Route exact path="/demo6" component={demoScreen6} />
             <Route path="/about" component={About} />
           </div>
         </MuiThemeProvider>
